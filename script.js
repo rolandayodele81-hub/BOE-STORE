@@ -94,6 +94,24 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* Mobile navigation */
+  var navToggle = document.querySelector(".nav-toggle");
+  var navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", function () {
+      var isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open navigation");
+      });
+    });
+  }
+
   /* Shared tile builder (used by both the home-page teaser and the full grid) */
   function buildTile(p) {
     var tile = document.createElement("article");
@@ -135,24 +153,28 @@
   var filters = document.getElementById("filters");
   var active = "All";
 
-  CATEGORIES.forEach(function (cat) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.textContent = cat;
-    b.className = cat === active ? "active" : "";
-    b.addEventListener("click", function () {
-      active = cat;
-      filters.querySelectorAll("button").forEach(function (x) { x.classList.remove("active"); });
-      b.classList.add("active");
-      render();
+  if (filters) {
+    CATEGORIES.forEach(function (cat) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = cat;
+      b.className = cat === active ? "active" : "";
+      b.addEventListener("click", function () {
+        active = cat;
+        filters.querySelectorAll("button").forEach(function (x) { x.classList.remove("active"); });
+        b.classList.add("active");
+        render();
+      });
+      filters.appendChild(b);
     });
-    filters.appendChild(b);
-  });
+  }
 
   function render() {
-    grid.innerHTML = "";
-    PRODUCTS.filter(function (p) { return active === "All" || p.category === active; })
-      .forEach(function (p) { grid.appendChild(buildTile(p)); });
+    if (grid) {
+      grid.innerHTML = "";
+      PRODUCTS.filter(function (p) { return active === "All" || p.category === active; })
+        .forEach(function (p) { grid.appendChild(buildTile(p)); });
+    }
     renderFeatured();
   }
 
