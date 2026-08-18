@@ -203,6 +203,16 @@ h4 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 18px; }
 .cards article { background: var(--card); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow-deep); }
 .cards p { color: var(--muted); margin: 0; }
 
+/* Contact section message */
+#contact .lede {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  max-width: 60ch;
+  margin: 32px auto;
+  color: var(--boe-white-pure);
+}
+
 /* Featured teaser section (home page) */
 .featured-section { position: relative; overflow: hidden; padding-top: 90px; }
 .featured-section .glow.g3 {
