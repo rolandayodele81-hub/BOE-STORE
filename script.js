@@ -219,6 +219,30 @@
   var adminLoginStatus = document.getElementById("adminLoginStatus");
   var productFormStatus = document.getElementById("productFormStatus");
   var adminInventory = document.getElementById("adminInventory");
+  var adminViewTabs = document.querySelectorAll("[data-admin-view]");
+  var adminViewPanels = document.querySelectorAll("[data-admin-view-panel]");
+
+  function showAdminView(view) {
+    adminViewTabs.forEach(function (tab) {
+      var isActive = tab.getAttribute("data-admin-view") === view;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+    });
+    adminViewPanels.forEach(function (panel) {
+      var isActive = panel.getAttribute("data-admin-view-panel") === view;
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+    if (view === "inventory") {
+      renderAdminInventory();
+    }
+  }
+
+  adminViewTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      showAdminView(tab.getAttribute("data-admin-view"));
+    });
+  });
 
   function openAdmin() {
     adminModal.hidden = false;
@@ -228,6 +252,7 @@
     adminLoginStatus.textContent = "";
     document.getElementById("adminId").value = "";
     document.getElementById("adminPassword").value = "";
+    showAdminView("add-fit");
   }
 
   function closeAdmin() {
@@ -354,7 +379,7 @@
     if (authenticateAdmin(id, password)) {
       adminLoginView.hidden = true;
       adminDashboard.hidden = false;
-      renderAdminInventory();
+      showAdminView("add-fit");
       adminLoginStatus.textContent = "";
       return;
     }

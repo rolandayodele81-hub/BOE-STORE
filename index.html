@@ -185,8 +185,14 @@
         <button type="button" class="btn-outline btn-mini" id="adminLogout">Logout</button>
       </div>
 
-      <div class="admin-grid">
-        <section class="admin-card">
+      <nav class="admin-view-nav" aria-label="Dashboard sections">
+        <button type="button" class="admin-view-tab is-active" data-admin-view="add-fit" aria-selected="true">Add new fit</button>
+        <button type="button" class="admin-view-tab" data-admin-view="inventory" aria-selected="false">Current inventory</button>
+      </nav>
+
+      <div class="admin-views">
+        <section class="admin-view is-active" data-admin-view-panel="add-fit">
+          <div class="admin-card">
           <h4>Add new fit</h4>
           <form id="productForm" class="admin-form">
             <label>
@@ -213,11 +219,14 @@
             <button type="submit" class="btn-gold">Upload new cloth</button>
             <p id="productFormStatus" class="status-text" aria-live="polite"></p>
           </form>
+          </div>
         </section>
 
-        <section class="admin-card admin-list-wrap">
-          <h4>Current inventory</h4>
-          <div id="adminInventory" class="admin-list"></div>
+        <section class="admin-view" data-admin-view-panel="inventory" hidden>
+          <div class="admin-card admin-list-wrap">
+            <h4>Current inventory</h4>
+            <div id="adminInventory" class="admin-list"></div>
+          </div>
         </section>
       </div>
     </div>
