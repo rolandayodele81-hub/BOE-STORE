@@ -278,7 +278,9 @@ h4 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 18px; }
 /* Admin panel */
 .admin-panel {
   max-width: 95vw;
-  max-height: 90vh;
+  height: min(760px, calc(100dvh - 32px));
+  max-height: calc(100dvh - 32px);
+  min-height: 0;
   padding: 18px 16px 14px;
   border-radius: 12px;
   display: flex;
@@ -290,6 +292,12 @@ h4 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 18px; }
 .admin-form {
   display: grid;
   gap: 12px;
+}
+#adminDashboard {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
 }
 .admin-form label {
   display: grid;
@@ -324,6 +332,7 @@ h4 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 18px; }
   display: grid;
   gap: 16px;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   grid-template-columns: 1fr;
 }
@@ -335,6 +344,8 @@ h4 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 18px; }
   border: 2px solid #000000;
   padding: 14px;
   overflow: hidden;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
@@ -558,9 +569,9 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; }
   .modal-body h3 { font-size: 1.5rem; margin-bottom: 12px; }
   .price { font-size: 1.3rem; margin-bottom: 16px; }
   .modal-body .btn-gold { width: 100%; }
-  .admin-panel { padding: 14px 12px 12px; max-height: 85vh; }
-  .admin-grid { gap: 12px; }
-  .admin-card { padding: 12px; }
+  .admin-panel { height: min(760px, calc(100dvh - 24px)); max-height: calc(100dvh - 24px); padding: 14px 12px 12px; }
+  .admin-grid { gap: 12px; grid-template-rows: auto minmax(0, 1fr); }
+  .admin-card { padding: 12px; overflow-y: auto; }
   .admin-form { gap: 10px; }
   .admin-form input, .admin-form select { padding: 9px 10px; font-size: 13px; }
   .admin-head { margin-bottom: 12px; }
@@ -568,7 +579,7 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; }
   .admin-item-image { width: 55px; height: 70px; border-radius: 2px; }
   .admin-item-actions { justify-content: stretch; gap: 6px; }
   .admin-item-actions > * { flex: 1; min-height: 36px; font-size: 12px; padding: 8px 6px; }
-  .admin-list-wrap { max-height: 350px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+  .admin-list-wrap { max-height: none; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
   .wa-float { right: 16px; bottom: 16px; width: 52px; height: 52px; min-height: 52px; min-width: 52px; }
   footer { padding: 24px 0; }
   .foot { font-size: 9px; letter-spacing: .1em; }
@@ -604,7 +615,7 @@ footer { border-top: 1px solid var(--border); padding: 30px 0; }
   .nav-actions .btn-outline { padding: 8px 6px; font-size: 9px; }
   .eyebrow { font-size: 9px; letter-spacing: .2em; }
   h1 { font-size: clamp(1.6rem, 10vw, 3rem); line-height: 1; }
-  .admin-panel { padding: 10px 8px 8px; }
+  .admin-panel { height: min(760px, calc(100dvh - 20px)); max-height: calc(100dvh - 20px); padding: 10px 8px 8px; }
   .admin-item { grid-template-columns: 50px 1fr; gap: 6px; }
   .admin-item-image { width: 50px; height: 60px; }
   .admin-item-fields { grid-template-columns: 1fr; }
